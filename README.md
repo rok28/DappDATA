@@ -16,8 +16,7 @@ La DApp propuesta tiene como objetivo mitigar los ataques de denegación de serv
 
 6. **Bibliotecas Python**: Para implementar las medidas de mitigación, se utilizarán las siguientes bibliotecas Python:
    - `Flask`  para el desarrollo del backend de la aplicación y la gestión de solicitudes HTTP.
-   - `python-ipfilter` para el filtrado de IP y bloqueo de direcciones IP sospechosas.
-   - `Rate limiter` para limitar la velocidad de las solicitudes entrantes y prevenir la sobrecarga del servidor.
+   - `limiter` para limitar la velocidad de las solicitudes entrantes y prevenir la sobrecarga del servidor.
    - `python-ddos` para detectar y mitigar ataques DDoS mediante el análisis de patrones de tráfico.
 
 ## Beneficios esperados
