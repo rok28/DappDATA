@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gapp </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+
+</head>
+
+<body>
+    <style>
+        .container {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        }
+        
+        .btn-primary {
+            color: white;
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: .375rem .75rem;
+            border-radius: .25rem;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004499;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Gapp - Gestion de Ficheros</h1>
+
+        <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Seleccionar archivo:</label>
+                <input type="file" name="file" id="file">
+            </div>
+            <button type="submit" class="btn-primary">Cargar Archivo</button>
+        </form>
+
+        <form id="get-data-form" method="post" action="/get-data">
+            <div class="form-group">
+                <label for="cid">CID del archivo:</label>
+                <input type="text" name="cid" id="cid" placeholder="Ingrese el CID del archivo">
+                <span class="alert">Ingrese un CID válido.</span>
+            </div>
+            <button type="submit" class="btn-primary">Obtener Datos</button>
+        </form>
+
+        <div id="message">
+            {% if message %}
+            <p>{{ message }}</p>
+            {% endif %}
+        </div>
+
+        <div id="message"></div>
+        <div id="log">
+            <textarea id="text_log" rows="10" cols="60" readonly></textarea>
+        </div>
+
+        <a href="{{ url_for('download') }}" class="text-primary">Descargar Archivo</a>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('form#get-data-form').submit(function(event) {
+                event.preventDefault();
+
+                var cid = $('input[name="cid"]').val();
+
+                if (!cid) {
+                    $('#cid').addClass('invalid');
+                    $('.alert').fadeIn();
+                    return;
+                }
+
+                $('.alert').fadeOut();
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: {
+                        cid: cid
+                    },
+                    success: function(data) {
+                        var extractedData = $(data).find('p').text();
+
+                        $('#text_log').val(extractedData);
+                        $('#message').empty(); // Limpiar el contenido del mensaje fuera del textarea
+
+                        // Mostrar el mensaje después de 3 segundos
+                        setTimeout(function() {
+                            $('#message').fadeIn();
+                        }, 3000);
+                    },
+                    error: function(xhr, status, error) {
+                        $('#text_log').val('Error al obtener los datos de IPFS: ' + xhr.responseText);
+                    }
+                });
+            });
+
+            $('input[name="cid"]').on('input', function() {
+                $('#cid').removeClass('invalid');
+                $('.alert').fadeOut();
+            });
+
+            // Ocultar el mensaje después de 3 segundos
+            setTimeout(function() {
+                $('#message').fadeOut();
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>
