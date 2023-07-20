@@ -10,14 +10,11 @@ La DApp propuesta tiene como objetivo mitigar los ataques de denegación de serv
 
 3. **Filtrado y detección de ataques**: Se implementarán algoritmos y bibliotecas Python especializadas en la detección y filtrado de tráfico malicioso. Estas bibliotecas analizarán los patrones de tráfico para identificar posibles ataques DoS y DDoS.
 
-4. **Mitigación de ataques**: La DApp utilizará técnicas como la limitación de velocidad, el filtrado de IP y la distribución de solicitudes para mitigar los ataques DoS y DDoS. Estas medidas ayudarán a garantizar que los recursos de la aplicación se asignen adecuadamente y se evite la saturación de los servidores.
-
-5. **Red de nodos**: Se establece el pc como un nodo publico en la red publica de IPFS.Los nodos estarán interconectados y utilizarán técnicas criptográficas para proteger la privacidad y la integridad de los datos.
+4. **Red de nodos**: Se establece el pc como un nodo publico en la red publica de IPFS.Los nodos estarán interconectados y utilizarán técnicas criptográficas para proteger la privacidad y la integridad de los datos.
 
 6. **Bibliotecas Python**: Para implementar las medidas de mitigación, se utilizarán las siguientes bibliotecas Python:
    - `Flask`  para el desarrollo del backend de la aplicación y la gestión de solicitudes HTTP.
    - `limiter` para limitar la velocidad de las solicitudes entrantes y prevenir la sobrecarga del servidor.
-   - `python-ddos` para detectar y mitigar ataques DDoS mediante el análisis de patrones de tráfico.
 
 ## Beneficios esperados
 - Mayor resistencia a los ataques DoS y DDoS, lo que garantizará una mayor disponibilidad y rendimiento de la aplicación.
